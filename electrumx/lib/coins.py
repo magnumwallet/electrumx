@@ -746,6 +746,29 @@ class LitecoinRegtest(LitecoinTestnet):
     TX_COUNT_HEIGHT = 1
 
 
+class LitecoinCash(Coin):
+    NAME = "LitecoinCash"
+    SHORTNAME = "LCC"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("1c")
+    P2SH_VERBYTES = [bytes.fromhex("05")]
+    WIF_BYTE = bytes.fromhex("b0")
+    GENESIS_HASH = ('12a765e31ffd4059bada1e25190f6e98'
+                    'c99d9714d334efa41a195a7e7e04bfe2')
+    DESERIALIZER = lib_tx.DeserializerSegWit
+    TX_COUNT = 8908766
+    TX_COUNT_HEIGHT = 1105256
+    TX_PER_BLOCK = 10
+    RPC_PORT = 9332
+    REORG_LIMIT = 800
+    PEERS = [
+        'hetzner01.fischl-online.de s50010',
+        'electrum.mgnm.rocks s3020',
+    ]
+
+
 class BitcoinCashRegtest(BitcoinTestnetMixin, Coin):
     NAME = "BitcoinCashABC"   # Some releases later remove the ABC suffix
     NET = "regtest"
@@ -1425,6 +1448,32 @@ class PeercoinTestnet(Peercoin):
     GENESIS_HASH = ('00000001f757bb737f6596503e17cd17'
                     'b0658ce630cc727c0cca81aec47c9f06')
     ESTIMATE_FEE = 0.001
+
+
+class BitcoinAir(Coin):
+    NAME = "BitcoinAir"
+    SHORTNAME = "XBA"
+    NET = "mainnet"
+    P2PKH_VERBYTE = bytes.fromhex("4b")
+    P2SH_VERBYTES = [bytes.fromhex("75")]
+    WIF_BYTE = bytes.fromhex("cb")
+    GENESIS_HASH = ('000003e8d6924aba5397cfa6d8ababe4'
+                    'f89384b4334cca6f823565c3ccf7799b')
+    DESERIALIZER = lib_tx.DeserializerTxTime
+    DAEMON = daemon.FakeEstimateFeeDaemon
+    ESTIMATE_FEE = 0.01
+    RELAY_FEE = 0.01
+    TX_COUNT = 1207356
+    TX_COUNT_HEIGHT = 306425
+    TX_PER_BLOCK = 4
+    RPC_PORT = 9902
+    REORG_LIMIT = 5000
+
+    PEERS = [
+        'electrum.mgnm.rocks s3012',
+    ]
+
+    VALUE_PER_COIN = 1000000
 
 
 class Trezarcoin(Coin):
@@ -2931,3 +2980,23 @@ class ECCoin(Coin):
         # you have to install scryp python module (pip install scrypt)
         import scrypt
         return scrypt.hash(header, header, 1024, 1, 1, 32)
+
+class Myriadcoin(Coin):
+    NAME = "Myriadcoin"
+    SHORTNAME = "XMY"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("32")
+    P2SH_VERBYTES = [bytes.fromhex("09")]
+    WIF_BYTE = bytes.fromhex("b2")
+    GENESIS_HASH = ('00000ffde4c020b5938441a0ea3d314bf619eff0b38f32f78f7583cffa1ea485')
+    DESERIALIZER = lib_tx.DeserializerSegWit
+    TX_COUNT = 8908766
+    TX_COUNT_HEIGHT = 1105256
+    TX_PER_BLOCK = 10
+    RPC_PORT = 9332
+    REORG_LIMIT = 800
+    PEERS = [
+        'electrum.mgnm.rocks s3021',
+    ]
