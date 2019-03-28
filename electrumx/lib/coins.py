@@ -2992,9 +2992,9 @@ class Myriadcoin(Coin):
     WIF_BYTE = bytes.fromhex("b2")
     GENESIS_HASH = ('00000ffde4c020b5938441a0ea3d314bf619eff0b38f32f78f7583cffa1ea485')
     DESERIALIZER = lib_tx.DeserializerSegWit
-    TX_COUNT = 8908766
-    TX_COUNT_HEIGHT = 1105256
-    TX_PER_BLOCK = 10
+    TX_COUNT = 318337769
+    TX_COUNT_HEIGHT = 1697605
+    TX_PER_BLOCK = 4000
     RPC_PORT = 9332
     REORG_LIMIT = 800
     PEERS = [
