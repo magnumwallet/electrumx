@@ -385,10 +385,11 @@ class BitcoinSV(BitcoinMixin, Coin):
     TX_COUNT_HEIGHT = 557037
     TX_PER_BLOCK = 400
     PEERS = [
-        'sv.electrumx.cash s t',
-        'sv1.hsmiths.com t60003 s60004',
+        'electrumx.bitcoinsv.io s',
         'satoshi.vision.cash s',
-        'electroncash.cascharia.com s t',
+        'sv.electrumx.cash s t',
+        'sv.jochen-hoenicke.de s t',
+        'sv.satoshi.io s t',
     ]
 
 
@@ -822,6 +823,45 @@ class ViacoinTestnet(Viacoin):
 class ViacoinTestnetSegWit(ViacoinTestnet):
     NET = "testnet-segwit"
     DESERIALIZER = lib_tx.DeserializerSegWit
+
+
+# Source: https://github.com/GravityCoinOfficial/GravityCoin/
+class GravityCoin(Coin):
+    NAME = "GravityCoin"
+    SHORTNAME = "GXX"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("28")
+    P2SH_VERBYTES = [bytes.fromhex("0a")]
+    WIF_BYTE = bytes.fromhex("d2")
+    GENESIS_HASH = ('322bad477efb4b33fa4b1f0b2861eaf543c61068da9898a95062fdb02ada486f')
+    TX_COUNT = 446050
+    TX_COUNT_HEIGHT = 547346
+    TX_PER_BLOCK = 2
+    PEER_DEFAULT_PORTS = {'t': '50001', 's': '50002'}
+    RPC_PORT = 29200
+    REORG_LIMIT = 5000
+    PEERS = []
+
+
+# Source: https://github.com/BitcoinZeroOfficial/bitcoinzero
+class Bitcoinzero(Coin):
+    NAME = "Bitcoinzero"
+    SHORTNAME = "BZX"
+    TX_COUNT = 43798
+    TX_COUNT_HEIGHT = 44
+    TX_PER_BLOCK = 576
+    NET = "mainnet"
+    GENESIS_HASH = '322bad477efb4b33fa4b1f0b2861eaf543c61068da9898a95062fdb02ada486f'
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("4b")
+    P2SH_VERBYTES = [bytes.fromhex("22")]
+    WIF_BYTE = bytes.fromhex("d2")
+    RPC_PORT = 29202
+    REORG_LIMIT = 5000
+    PEERS = []
 
 
 class Unitus(Coin):
@@ -1410,6 +1450,37 @@ class Bitbay(ScryptMixin, Coin):
     TX_PER_BLOCK = 3
     RPC_PORT = 19914
     REORG_LIMIT = 5000
+
+
+class DeepOnion(Coin):
+    NAME = "DeepOnion"
+    SHORTNAME = "ONION"
+    NET = "mainnet"
+    P2PKH_VERBYTE = bytes.fromhex("1F")
+    P2SH_VERBYTES = [bytes.fromhex("4E")]
+    WIF_BYTE = bytes.fromhex("9f")
+    GENESIS_HASH = ('000004e29458ef4f2e0abab544737b07'
+                    '344e6ff13718f7c2d12926166db07b5e')
+    DESERIALIZER = lib_tx.DeserializerTxTime
+    DAEMON = daemon.LegacyRPCDaemon
+    TX_COUNT = 1194707
+    TX_COUNT_HEIGHT = 530000
+    TX_PER_BLOCK = 2
+    RPC_PORT = 18580
+    REORG_LIMIT = 200
+    XPUB_VERBYTES = bytes.fromhex("0488B21E")
+    XPRV_VERBYTES = bytes.fromhex("0488ADE4")
+    PEERS = []
+
+    @classmethod
+    def header_hash(cls, header):
+        '''
+        Given a header return the hash for DeepOnion.
+        Need to download `x13_hash` module
+        Source code: https://github.com/MaruCoinOfficial/x13-hash
+        '''
+        import x13_hash
+        return x13_hash.getPoWHash(header)
 
 
 class Peercoin(Coin):
