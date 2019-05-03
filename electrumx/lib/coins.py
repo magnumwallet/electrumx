@@ -3000,3 +3000,25 @@ class Myriadcoin(Coin):
     PEERS = [
         'electrum.mgnm.rocks s3021',
     ]
+
+class Microbitcoin(Coin):
+    NAME = "Microbitcoin"
+    SHORTNAME = "MBC"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("1a")
+    P2SH_VERBYTES = [bytes.fromhex("33")]
+    WIF_BYTE = bytes.fromhex("80")
+    GENESIS_HASH = ('000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f')
+    DESERIALIZER = lib_tx.DeserializerSegWit
+    TX_COUNT = 318337769
+    TX_COUNT_HEIGHT = 1697605
+    TX_PER_BLOCK = 4000
+    RPC_PORT = 9332
+    REORG_LIMIT = 800
+    PEERS = [
+        'electrum.mgnm.rocks s3023',
+        '52.78.182.106 t7403',
+        '13.57.248.201 t7403',
+    ]
