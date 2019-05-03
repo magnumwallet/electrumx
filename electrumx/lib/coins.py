@@ -3021,3 +3021,20 @@ class Microbitcoin(Coin):
         '52.78.182.106 t7403',
         '13.57.248.201 t7403',
     ]
+
+class Anon(EquihashMixin, Coin):
+    NAME = "ANON"
+    SHORTNAME = "ANON"
+    NET = "mainnet"
+    P2PKH_VERBYTE = bytes.fromhex("0582")
+    P2SH_VERBYTES = [bytes.fromhex("5389")]
+    GENESIS_HASH = ('053a237d7ad7106e341a403286604df55bfe6f301fc9fff03a06f81c8c565b34')
+    DESERIALIZER = lib_tx.DeserializerZcash
+    TX_COUNT = 329196
+    TX_COUNT_HEIGHT = 68379
+    TX_PER_BLOCK = 4000
+    RPC_PORT = 8023
+    REORG_LIMIT = 800
+    PEERS = [
+        'electrum.mgnm.rocks s3001',
+    ]
