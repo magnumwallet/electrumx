@@ -10,14 +10,15 @@
 
 import re
 from collections import namedtuple
-from ipaddress import ip_address
+from ipaddress import IPv4Address, IPv6Address
 
+from aiorpcx import classify_host
 from electrumx.lib.coins import Coin
 from electrumx.lib.env_base import EnvBase
 import electrumx.lib.util as lib_util
 
 
-NetIdentity = namedtuple('NetIdentity', 'host tcp_port ssl_port nick_suffix')
+NetIdentity = namedtuple('NetIdentity', 'host tcp_port ssl_port')
 
 
 class Env(EnvBase):
@@ -27,11 +28,11 @@ class Env(EnvBase):
     '''
 
     # Peer discovery
-    PD_OFF, PD_SELF, PD_ON = range(3)
+    PD_OFF, PD_SELF, PD_ON = ('OFF', 'SELF', 'ON')
 
     def __init__(self, coin=None):
         super().__init__()
-        self.obsolete(['UTXO_MB', 'HIST_MB', 'NETWORK'])
+        self.obsolete(["MAX_SUBSCRIPTIONS", "MAX_SUBS", "MAX_SESSION_SUBS", "BANDWIDTH_LIMIT"])
         self.db_dir = self.required('DB_DIRECTORY')
         self.db_engine = self.default('DB_ENGINE', 'leveldb')
         self.daemon_url = self.required('DAEMON_URL')
@@ -52,12 +53,12 @@ class Env(EnvBase):
             self.ssl_certfile = self.required('SSL_CERTFILE')
             self.ssl_keyfile = self.required('SSL_KEYFILE')
         self.rpc_port = self.integer('RPC_PORT', 8000)
-        self.max_subscriptions = self.integer('MAX_SUBSCRIPTIONS', 10000)
         self.banner_file = self.default('BANNER_FILE', None)
         self.tor_banner_file = self.default('TOR_BANNER_FILE',
                                             self.banner_file)
         self.anon_logs = self.boolean('ANON_LOGS', False)
         self.log_sessions = self.integer('LOG_SESSIONS', 3600)
+        self.log_level = self.default('LOG_LEVEL', 'info').upper()
         # Peer discovery
         self.peer_discovery = self.peer_discovery_enum()
         self.peer_announce = self.boolean('PEER_ANNOUNCE', True)
@@ -68,10 +69,13 @@ class Env(EnvBase):
         self.donation_address = self.default('DONATION_ADDRESS', '')
         # Server limits to help prevent DoS
         self.max_send = self.integer('MAX_SEND', self.coin.DEFAULT_MAX_SEND)
-        self.max_subs = self.integer('MAX_SUBS', 250000)
         self.max_sessions = self.sane_max_sessions()
-        self.max_session_subs = self.integer('MAX_SESSION_SUBS', 50000)
-        self.bandwidth_limit = self.integer('BANDWIDTH_LIMIT', 2000000)
+        self.cost_soft_limit = self.integer('COST_SOFT_LIMIT', 1000)
+        self.cost_hard_limit = self.integer('COST_HARD_LIMIT', 10000)
+        self.bw_unit_cost = self.integer('BANDWIDTH_UNIT_COST', 5000)
+        self.initial_concurrent = self.integer('INITIAL_CONCURRENT', 10)
+        self.request_sleep = self.integer('REQUEST_SLEEP', 2500)
+        self.request_timeout = self.integer('REQUEST_TIMEOUT', 30)
         self.session_timeout = self.integer('SESSION_TIMEOUT', 600)
         self.drop_client = self.custom("DROP_CLIENT", None, re.compile)
         self.blacklist_url = self.default('BLACKLIST_URL', self.coin.BLACKLIST_URL)
@@ -107,13 +111,15 @@ class Env(EnvBase):
         if host is None:
             return None
         try:
-            ip = ip_address(host)
+            host = classify_host(host)
         except ValueError:
-            bad = (not lib_util.is_valid_hostname(host)
-                   or host.lower() == 'localhost')
+            bad = True
         else:
-            bad = (ip.is_multicast or ip.is_unspecified
-                   or (ip.is_private and self.peer_announce))
+            if isinstance(host, (IPv4Address, IPv6Address)):
+                bad = (host.is_multicast or host.is_unspecified
+                       or (host.is_private and self.peer_announce))
+            else:
+                bad = host.lower() == 'localhost'
         if bad:
             raise self.Error('"{}" is not a valid REPORT_HOST'.format(host))
         tcp_port = self.integer('REPORT_TCP_PORT', self.tcp_port) or None
@@ -122,10 +128,9 @@ class Env(EnvBase):
             raise self.Error('REPORT_TCP_PORT and REPORT_SSL_PORT '
                              'both resolve to {}'.format(tcp_port))
         return NetIdentity(
-            host,
+            str(host),
             tcp_port,
             ssl_port,
-            ''
         )
 
     def tor_identity(self, clearnet):
@@ -156,7 +161,6 @@ class Env(EnvBase):
             host,
             tcp_port,
             ssl_port,
-            '_tor',
         )
 
     def hosts_dict(self):
