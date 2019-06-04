@@ -3107,7 +3107,9 @@ class Cream(Coin):
     def header_hash(cls, header):
         '''Given a header return the hash.'''
         from skein import skein512
-        return sha256(skein512().update(header).digest()).digest()
+        h = skein512()
+        h.update(header)
+        return sha256(h.digest()).digest()
 
 class Slice(Coin):
     NAME = "Slice"
