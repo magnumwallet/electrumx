@@ -3093,7 +3093,7 @@ class Cream(Coin):
     P2PKH_VERBYTE = bytes.fromhex("1c")
     P2SH_VERBYTES = [bytes.fromhex("06")]
     WIF_BYTE = bytes.fromhex("a6")
-    GENESIS_HASH = ('ecfeab46b26cdc18bc4085ef170ee139d25765f776ab7bfec9ef136bc066ab7a ')
+    GENESIS_HASH = ('00000091271e3e42d5d07587169a0a60a5028ec1ec401eb0827f7764dcd121c5 ')
     DESERIALIZER = lib_tx.DeserializerSegWit
     TX_COUNT = 329196
     TX_COUNT_HEIGHT = 68379
@@ -3102,6 +3102,12 @@ class Cream(Coin):
     REORG_LIMIT = 800
     PEERS = [
     ]
+
+    @classmethod
+    def header_hash(cls, header):
+        '''Given a header return the hash.'''
+        from skein import skein512
+        return sha256(skein512().update(header).digest()).digest()
 
 class Slice(Coin):
     NAME = "Slice"
