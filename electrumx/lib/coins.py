@@ -3083,3 +3083,41 @@ class Anon(EquihashMixin, Coin):
     PEERS = [
         'electrum.mgnm.rocks s3001',
     ]
+
+class Cream(Coin):
+    NAME = "Cream"
+    SHORTNAME = "CRM"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("1c")
+    P2SH_VERBYTES = [bytes.fromhex("06")]
+    WIF_BYTE = bytes.fromhex("a6")
+    GENESIS_HASH = ('000000a6b438a01dcedc110cc8c30e900b04ecf864c04b12fab404238170e8c8')
+    DESERIALIZER = lib_tx.DeserializerSegWit
+    TX_COUNT = 329196
+    TX_COUNT_HEIGHT = 68379
+    TX_PER_BLOCK = 4000
+    RPC_PORT = 8023
+    REORG_LIMIT = 800
+    PEERS = [
+    ]
+
+class Slicecoin(Coin):
+    NAME = "Slicecoin"
+    SHORTNAME = "SLC"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("7d")
+    P2SH_VERBYTES = [bytes.fromhex("3f")]
+    WIF_BYTE = bytes.fromhex("73")
+    GENESIS_HASH = ('f09eb1caec7922cbcf67035d59bb072404b9d4355913783cc9af8af38885c88e')
+    DESERIALIZER = lib_tx.DeserializerSegWit
+    TX_COUNT = 329196
+    TX_COUNT_HEIGHT = 68379
+    TX_PER_BLOCK = 4000
+    RPC_PORT = 8023
+    REORG_LIMIT = 800
+    PEERS = [
+    ]
