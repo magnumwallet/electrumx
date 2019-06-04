@@ -3103,8 +3103,8 @@ class Cream(Coin):
     PEERS = [
     ]
 
-class Slicecoin(Coin):
-    NAME = "Slicecoin"
+class Slice(Coin):
+    NAME = "Slice"
     SHORTNAME = "SLC"
     NET = "mainnet"
     XPUB_VERBYTES = bytes.fromhex("0488b21e")
