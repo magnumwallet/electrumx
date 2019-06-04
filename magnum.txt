@@ -1,0 +1,6 @@
+apk add py-configobj libusb py-pip python-dev gcc linux-headers musl-dev
+
+@classmethod
+def header_hash(cls, header):
+    import qubit_hash
+    return qubit_hash.getPoWHash(header)

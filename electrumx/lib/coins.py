@@ -3120,7 +3120,7 @@ class Slice(Coin):
     P2PKH_VERBYTE = bytes.fromhex("7d")
     P2SH_VERBYTES = [bytes.fromhex("3f")]
     WIF_BYTE = bytes.fromhex("73")
-    GENESIS_HASH = ('f09eb1caec7922cbcf67035d59bb072404b9d4355913783cc9af8af38885c88e')
+    GENESIS_HASH = ('c4de0ff17658843e77a93586199aa2c7bb21f13728526f241cf873da6c2bb1af')
     DESERIALIZER = lib_tx.DeserializerSegWit
     TX_COUNT = 329196
     TX_COUNT_HEIGHT = 68379
