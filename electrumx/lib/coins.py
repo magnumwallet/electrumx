@@ -3093,7 +3093,7 @@ class Cream(Coin):
     P2PKH_VERBYTE = bytes.fromhex("1c")
     P2SH_VERBYTES = [bytes.fromhex("06")]
     WIF_BYTE = bytes.fromhex("a6")
-    GENESIS_HASH = ('000000a6b438a01dcedc110cc8c30e900b04ecf864c04b12fab404238170e8c8')
+    GENESIS_HASH = ('ecfeab46b26cdc18bc4085ef170ee139d25765f776ab7bfec9ef136bc066ab7a ')
     DESERIALIZER = lib_tx.DeserializerSegWit
     TX_COUNT = 329196
     TX_COUNT_HEIGHT = 68379
