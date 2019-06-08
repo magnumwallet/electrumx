@@ -3129,3 +3129,24 @@ class Slice(Coin):
     REORG_LIMIT = 800
     PEERS = [
     ]
+
+class Zerozed(Coin):
+    NAME = "Zerozed"
+    SHORTNAME = "x0z"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("1c")
+    P2SH_VERBYTES = [bytes.fromhex("05")]
+    WIF_BYTE = bytes.fromhex("9c")
+    GENESIS_HASH = ('b345b68b4c08441d6b7f9f58f9fa83b0bce5b670afa7274e3f5725ea1be8fb03')
+    DESERIALIZER = lib_tx.DeserializerSegWit
+    TX_COUNT = 329196
+    TX_COUNT_HEIGHT = 68379
+    TX_PER_BLOCK = 4000
+    RPC_PORT = 8023
+    REORG_LIMIT = 800
+    PEERS = [
+    ]
+
+
