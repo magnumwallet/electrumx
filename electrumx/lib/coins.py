@@ -3203,15 +3203,6 @@ class Navcoin(Coin):
     RPC_PORT = 8023
     REORG_LIMIT = 8000
     PEERS = []
-    @classmethod
-    def header_hash(cls, header):
-        '''
-        Given a header return the hash for DeepOnion.
-        Need to download `x13_hash` module
-        Source code: https://github.com/MaruCoinOfficial/x13-hash
-        '''
-        import x13_hash
-        return x13_hash.getPoWHash(header)
 # Magnum coins finish
 
 
