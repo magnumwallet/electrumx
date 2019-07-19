@@ -386,6 +386,16 @@ class DeserializerTxTime(Deserializer):
         )
 
 
+class DeserializerEquihashSegWitTxTime(DeserializerEquihashSegWit):
+    def read_tx(self):
+        return TxTime(
+            self._read_le_int32(),   # version
+            self._read_le_uint32(),  # time
+            self._read_inputs(),     # inputs
+            self._read_outputs(),    # outputs
+            self._read_le_uint32(),  # locktime
+        )
+
 class TxTimeSegWit(namedtuple(
         "Tx", "version time marker flag inputs outputs witness locktime")):
     '''Class representing a SegWit transaction with time.'''

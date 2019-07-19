@@ -3196,7 +3196,7 @@ class Navcoin(Coin):
     P2SH_VERBYTES = [bytes.fromhex("55")]
     WIF_BYTE = bytes.fromhex("96")
     GENESIS_HASH = ('00006a4e3e18c71c6d48ad6c261e2254fa764cf29607a4357c99b712dfbb8e6a')
-    DESERIALIZER = lib_tx.DeserializerTxTime
+    DESERIALIZER = lib_tx.DeserializerEquihashSegWitTxTime
     TX_COUNT = 329196
     TX_COUNT_HEIGHT = 68379
     TX_PER_BLOCK = 4000
