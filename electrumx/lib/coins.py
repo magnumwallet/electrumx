@@ -3014,6 +3014,181 @@ class Onixcoin(Coin):
         return x11_hash.getPoWHash(header)
 
 
+# Magnum coins start
+class LitecoinCash(Coin):
+    NAME = "LitecoinCash"
+    SHORTNAME = "LCC"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("1c")
+    P2SH_VERBYTES = [bytes.fromhex("05")]
+    WIF_BYTE = bytes.fromhex("b0")
+    GENESIS_HASH = ('12a765e31ffd4059bada1e25190f6e98'
+                    'c99d9714d334efa41a195a7e7e04bfe2')
+    DESERIALIZER = lib_tx.DeserializerSegWit
+    TX_COUNT = 8908766
+    TX_COUNT_HEIGHT = 1105256
+    TX_PER_BLOCK = 10
+    RPC_PORT = 9332
+    REORG_LIMIT = 800
+    PEERS = [
+        'hetzner01.fischl-online.de s50010',
+        'electrum.mgnm.rocks s3020',
+    ]
+
+
+class BitcoinAir(Coin):
+    NAME = "BitcoinAir"
+    SHORTNAME = "XBA"
+    NET = "mainnet"
+    P2PKH_VERBYTE = bytes.fromhex("4b")
+    P2SH_VERBYTES = [bytes.fromhex("75")]
+    WIF_BYTE = bytes.fromhex("cb")
+    GENESIS_HASH = ('000003e8d6924aba5397cfa6d8ababe4'
+                    'f89384b4334cca6f823565c3ccf7799b')
+    DESERIALIZER = lib_tx.DeserializerTxTime
+    DAEMON = daemon.FakeEstimateFeeDaemon
+    ESTIMATE_FEE = 0.01
+    RELAY_FEE = 0.01
+    TX_COUNT = 1207356
+    TX_COUNT_HEIGHT = 306425
+    TX_PER_BLOCK = 4
+    RPC_PORT = 9902
+    REORG_LIMIT = 5000
+    PEERS = [
+        'electrum.mgnm.rocks s3012',
+    ]
+    VALUE_PER_COIN = 1000000
+
+
+class Myriadcoin(Coin):
+    NAME = "Myriadcoin"
+    SHORTNAME = "XMY"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("32")
+    P2SH_VERBYTES = [bytes.fromhex("09")]
+    WIF_BYTE = bytes.fromhex("b2")
+    GENESIS_HASH = ('00000ffde4c020b5938441a0ea3d314bf619eff0b38f32f78f7583cffa1ea485')
+    DESERIALIZER = lib_tx.DeserializerSegWit
+    TX_COUNT = 318337769
+    TX_COUNT_HEIGHT = 1697605
+    TX_PER_BLOCK = 4000
+    RPC_PORT = 9332
+    REORG_LIMIT = 800
+    PEERS = [
+        'electrum.mgnm.rocks s3021',
+    ]
+
+
+class Microbitcoin(Coin):
+    NAME = "Microbitcoin"
+    SHORTNAME = "MBC"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("1a")
+    P2SH_VERBYTES = [bytes.fromhex("33")]
+    WIF_BYTE = bytes.fromhex("80")
+    GENESIS_HASH = ('000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f')
+    DESERIALIZER = lib_tx.DeserializerSegWit
+    TX_COUNT = 318337769
+    TX_COUNT_HEIGHT = 1697605
+    TX_PER_BLOCK = 4000
+    RPC_PORT = 9332
+    REORG_LIMIT = 800
+    PEERS = [
+        'electrum.mgnm.rocks s3023',
+        '52.78.182.106 t7403',
+        '13.57.248.201 t7403',
+    ]
+
+
+class Anon(EquihashMixin, Coin):
+    NAME = "ANON"
+    SHORTNAME = "ANON"
+    NET = "mainnet"
+    P2PKH_VERBYTE = bytes.fromhex("0582")
+    P2SH_VERBYTES = [bytes.fromhex("5389")]
+    GENESIS_HASH = ('053a237d7ad7106e341a403286604df55bfe6f301fc9fff03a06f81c8c565b34')
+    DESERIALIZER = lib_tx.DeserializerZcash
+    TX_COUNT = 329196
+    TX_COUNT_HEIGHT = 68379
+    TX_PER_BLOCK = 4000
+    RPC_PORT = 8023
+    REORG_LIMIT = 800
+    PEERS = [
+        'electrum.mgnm.rocks s3001',
+    ]
+
+
+class Cream(Coin):
+    NAME = "Cream"
+    SHORTNAME = "CRM"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("1c")
+    P2SH_VERBYTES = [bytes.fromhex("06")]
+    WIF_BYTE = bytes.fromhex("a6")
+    GENESIS_HASH = ('00000091271e3e42d5d07587169a0a60a5028ec1ec401eb0827f7764dcd121c5')
+    DESERIALIZER = lib_tx.DeserializerSegWit
+    TX_COUNT = 329196
+    TX_COUNT_HEIGHT = 68379
+    TX_PER_BLOCK = 4000
+    RPC_PORT = 8023
+    REORG_LIMIT = 800
+    PEERS = []
+    @classmethod
+    def header_hash(cls, header):
+        '''Given a header return the hash.'''
+        from skein import skein512
+        h = skein512()
+        h.update(header)
+        return sha256(h.digest()).digest()
+
+
+class Slice(Coin):
+    NAME = "Slice"
+    SHORTNAME = "SLC"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("7d")
+    P2SH_VERBYTES = [bytes.fromhex("3f")]
+    WIF_BYTE = bytes.fromhex("73")
+    GENESIS_HASH = ('c4de0ff17658843e77a93586199aa2c7bb21f13728526f241cf873da6c2bb1af')
+    DESERIALIZER = lib_tx.DeserializerSegWit
+    TX_COUNT = 329196
+    TX_COUNT_HEIGHT = 68379
+    TX_PER_BLOCK = 4000
+    RPC_PORT = 8023
+    REORG_LIMIT = 800
+    PEERS = []
+
+
+class Zerozed(Coin):
+    NAME = "Zerozed"
+    SHORTNAME = "x0z"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("1c")
+    P2SH_VERBYTES = [bytes.fromhex("05")]
+    WIF_BYTE = bytes.fromhex("9c")
+    GENESIS_HASH = ('b345b68b4c08441d6b7f9f58f9fa83b0bce5b670afa7274e3f5725ea1be8fb03')
+    DESERIALIZER = lib_tx.DeserializerSegWit
+    TX_COUNT = 329196
+    TX_COUNT_HEIGHT = 68379
+    TX_PER_BLOCK = 4000
+    RPC_PORT = 8023
+    REORG_LIMIT = 800
+    PEERS = []
+# Magnum coins finish
+
+
 class Electra(Coin):
     NAME = "Electra"
     SHORTNAME = "ECA"
