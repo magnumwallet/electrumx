@@ -3186,6 +3186,23 @@ class Zerozed(Coin):
     RPC_PORT = 8023
     REORG_LIMIT = 800
     PEERS = []
+
+
+class Navcoin(Coin):
+    NAME = "Navcoin"
+    SHORTNAME = "NAV"
+    NET = "mainnet"
+    P2PKH_VERBYTE = bytes.fromhex("35")
+    P2SH_VERBYTES = [bytes.fromhex("55")]
+    WIF_BYTE = bytes.fromhex("96")
+    GENESIS_HASH = ('00006a4e3e18c71c6d48ad6c261e2254fa764cf29607a4357c99b712dfbb8e6a')
+    DESERIALIZER = lib_tx.DeserializerTxTime
+    TX_COUNT = 329196
+    TX_COUNT_HEIGHT = 68379
+    TX_PER_BLOCK = 4000
+    RPC_PORT = 8023
+    REORG_LIMIT = 800
+    PEERS = []
 # Magnum coins finish
 
 
