@@ -3201,7 +3201,7 @@ class Navcoin(Coin):
     TX_COUNT_HEIGHT = 68379
     TX_PER_BLOCK = 4000
     RPC_PORT = 8023
-    REORG_LIMIT = 800
+    REORG_LIMIT = 8000
     PEERS = []
     @classmethod
     def header_hash(cls, header):
