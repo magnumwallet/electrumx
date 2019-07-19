@@ -3196,7 +3196,7 @@ class Navcoin(Coin):
     P2SH_VERBYTES = [bytes.fromhex("55")]
     WIF_BYTE = bytes.fromhex("96")
     GENESIS_HASH = ('00006a4e3e18c71c6d48ad6c261e2254fa764cf29607a4357c99b712dfbb8e6a')
-    DESERIALIZER = lib_tx.DeserializerEquihashSegWitTxTime
+    DESERIALIZER = lib_tx.DeserializerTxTime
     TX_COUNT = 329196
     TX_COUNT_HEIGHT = 68379
     TX_PER_BLOCK = 4000
@@ -3204,26 +3204,15 @@ class Navcoin(Coin):
     REORG_LIMIT = 8000
     PEERS = []
     @classmethod
-    def genesis_block(cls, block):
-        '''Check the Genesis block is the right one for this coin.
-
-        Return the block less its unspendable coinbase.
-        '''
-        header = cls.block_header(block, 0)
-        header_hex_hash = hash_to_hex_str(cls.header_hash_gen(header))
-        if header_hex_hash != cls.GENESIS_HASH:
-            raise CoinError('genesis block has hash {} expected {}'
-                            .format(header_hex_hash, cls.GENESIS_HASH))
-        return header + bytes(1)
-    @classmethod
-    def header_hash_gen(cls, header):
-        '''
-        Given a header return the hash for DeepOnion.
-        Need to download `x13_hash` module
-        Source code: https://github.com/MaruCoinOfficial/x13-hash
-        '''
+    def header_hash(cls, header):
+        '''Given a header return the hash.'''
+        version, = util.unpack_le_uint32_from(header)
         import x13_hash
-        return x13_hash.getPoWHash(header)
+
+        if version > 6:
+            return double_sha256(header)
+        else:
+            return x13_hash.getPoWHash(header)
 # Magnum coins finish
 
 
