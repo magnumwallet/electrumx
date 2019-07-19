@@ -3203,6 +3203,27 @@ class Navcoin(Coin):
     RPC_PORT = 8023
     REORG_LIMIT = 8000
     PEERS = []
+    @classmethod
+    def genesis_block(cls, block):
+        '''Check the Genesis block is the right one for this coin.
+
+        Return the block less its unspendable coinbase.
+        '''
+        header = cls.block_header(block, 0)
+        header_hex_hash = hash_to_hex_str(cls.header_hash_gen(header))
+        if header_hex_hash != cls.GENESIS_HASH:
+            raise CoinError('genesis block has hash {} expected {}'
+                            .format(header_hex_hash, cls.GENESIS_HASH))
+        return header + bytes(1)
+    @classmethod
+    def header_hash_gen(cls, header):
+        '''
+        Given a header return the hash for DeepOnion.
+        Need to download `x13_hash` module
+        Source code: https://github.com/MaruCoinOfficial/x13-hash
+        '''
+        import x13_hash
+        return x13_hash.getPoWHash(header)
 # Magnum coins finish
 
 
