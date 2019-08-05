@@ -922,6 +922,25 @@ class Bitcoinzero(Coin):
     PEERS = []
 
 
+# Source: https://github.com/LIMXTEC/Megacoin/blob/0.15/src/chainparams.cpp
+class Megacoin(Coin):
+    NAME = "Megacoin"
+    SHORTNAME = "MEC"
+    TX_COUNT = 43798
+    TX_COUNT_HEIGHT = 44
+    TX_PER_BLOCK = 576
+    NET = "mainnet"
+    GENESIS_HASH = ('7520788e2d99eec7cf6cf7315577e1268e177fff94cb0a7caf6a458ceeea9ac2')
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("32")
+    P2SH_VERBYTES = [bytes.fromhex("22")]
+    WIF_BYTE = bytes.fromhex("b2")
+    RPC_PORT = 29202
+    REORG_LIMIT = 5000
+    PEERS = []
+
+
 class Unitus(Coin):
     NAME = "Unitus"
     SHORTNAME = "UIS"
