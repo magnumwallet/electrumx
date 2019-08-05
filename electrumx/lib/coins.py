@@ -877,6 +877,11 @@ class Bitcloud(Coin):
     REORG_LIMIT = 5000
     PEERS = []
 
+    @classmethod
+    def header_hash(cls, header):
+        '''Given a header return the hash.'''
+        import quark_hash
+        return quark_hash.getPoWHash(header)
 
 # Source: https://github.com/GravityCoinOfficial/GravityCoin/
 class GravityCoin(Coin):
