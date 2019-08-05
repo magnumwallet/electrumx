@@ -906,7 +906,7 @@ class Bitcoinzero(Coin):
     TX_COUNT_HEIGHT = 44
     TX_PER_BLOCK = 576
     NET = "mainnet"
-    GENESIS_HASH = '322bad477efb4b33fa4b1f0b2861eaf543c61068da9898a95062fdb02ada486f'
+    GENESIS_HASH = ('322bad477efb4b33fa4b1f0b2861eaf543c61068da9898a95062fdb02ada486f')
     XPUB_VERBYTES = bytes.fromhex("0488b21e")
     XPRV_VERBYTES = bytes.fromhex("0488ade4")
     P2PKH_VERBYTE = bytes.fromhex("4b")
