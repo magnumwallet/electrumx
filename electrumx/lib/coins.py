@@ -3133,7 +3133,6 @@ class Anon(EquihashMixin, Coin):
     P2PKH_VERBYTE = bytes.fromhex("0582")
     P2SH_VERBYTES = [bytes.fromhex("5389")]
     GENESIS_HASH = ('053a237d7ad7106e341a403286604df55bfe6f301fc9fff03a06f81c8c565b34')
-                     03e1c4bb705c871bf9bfda3e74b7f8f8
     DESERIALIZER = lib_tx.DeserializerZcash
     TX_COUNT = 329196
     TX_COUNT_HEIGHT = 68379
