@@ -858,6 +858,26 @@ class ViacoinTestnetSegWit(ViacoinTestnet):
     DESERIALIZER = lib_tx.DeserializerSegWit
 
 
+# Source: https://github.com/LIMXTEC/Bitcloud/blob/master/src/chainparams.cpp
+class Bitcloud(Coin):
+    NAME = "Bitcloud"
+    SHORTNAME = "BTDX"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("19")
+    P2SH_VERBYTES = [bytes.fromhex("05")]
+    WIF_BYTE = bytes.fromhex("99")
+    GENESIS_HASH = ('000002d56463941c20eae5cb474cc805b646515d18bc7dc222a0885b206eadb0')
+    TX_COUNT = 446050
+    TX_COUNT_HEIGHT = 547346
+    TX_PER_BLOCK = 2
+    PEER_DEFAULT_PORTS = {'t': '50001', 's': '50002'}
+    RPC_PORT = 29200
+    REORG_LIMIT = 5000
+    PEERS = []
+
+
 # Source: https://github.com/GravityCoinOfficial/GravityCoin/
 class GravityCoin(Coin):
     NAME = "GravityCoin"
@@ -3113,6 +3133,7 @@ class Anon(EquihashMixin, Coin):
     P2PKH_VERBYTE = bytes.fromhex("0582")
     P2SH_VERBYTES = [bytes.fromhex("5389")]
     GENESIS_HASH = ('053a237d7ad7106e341a403286604df55bfe6f301fc9fff03a06f81c8c565b34')
+                     03e1c4bb705c871bf9bfda3e74b7f8f8
     DESERIALIZER = lib_tx.DeserializerZcash
     TX_COUNT = 329196
     TX_COUNT_HEIGHT = 68379
