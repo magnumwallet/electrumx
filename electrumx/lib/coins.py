@@ -46,7 +46,7 @@ import electrumx.lib.tx_dash as lib_tx_dash
 import electrumx.server.block_processor as block_proc
 import electrumx.server.daemon as daemon
 from electrumx.server.session import (ElectrumX, DashElectrumX,
-                                      SmartCashElectrumX, AuxPoWElectrumX)
+                                      SmartCashElectrumX, AuxPoWElectrumX, SyscoinElectrumX)
 
 
 Block = namedtuple("Block", "raw header transactions")
@@ -3257,6 +3257,31 @@ class Navcoin(Coin):
             return double_sha256(header)
         else:
             return x13_hash.getPoWHash(header)
+
+
+class Syscoin(AuxPowMixin, Coin):
+    NAME = "Syscoin"
+    SHORTNAME = "SYS"
+    NET = "mainnet"
+    P2PKH_VERBYTE = bytes.fromhex("3f")
+    P2SH_VERBYTES = bytes.fromhex("05")
+    WIF_BYTE = bytes.fromhex("80")
+
+    GENESIS_HASH = ('1b4ab9f52fb1cfe8a20008b444ff3b11'
+                    'bcf277c985f530941e7bcca92ca14473')
+    TX_COUNT = 3350
+    TX_COUNT_HEIGHT = 3372
+    TX_PER_BLOCK = 333
+    RPC_PORT = 8368
+    REORG_LIMIT = 2000
+    DEFAULT_MAX_SEND = 25000000
+
+    PEER_DEFAULT_PORTS = {'t': '58881', 's': '58882'}
+    PEERS = []
+
+    DAEMON = daemon.SyscoinDaemon
+    SESSIONCLS = SyscoinElectrumX
+    DESERIALIZER = lib_tx.DeserializerAuxPowSegWit
 # Magnum coins finish
 
 

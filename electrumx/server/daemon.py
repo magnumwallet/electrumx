@@ -454,6 +454,24 @@ class DecredDaemon(Daemon):
         return aiohttp.ClientSession(connector=connector)
 
 
+class SyscoinDaemon(Daemon):
+
+    async def masternode_broadcast(self, params):
+        '''Broadcast a transaction to the network.'''
+        return await self._send_single('masternodebroadcast', params)
+
+    async def masternode_list(self, params):
+        '''Return the masternode status.'''
+        return await self._send_single('masternodelist', params)
+
+    async def assetallocationsend(self, asset_guid, from_address, asset_to, memo):
+        return await self._send_single('assetallocationsend', [asset_guid, from_address, asset_to, memo, ""])
+
+    async def listassetallocations(self, address):
+        result_ = await self._send_single('listassetallocations', [0, 0, address])
+        return result_
+
+
 class PreLegacyRPCDaemon(LegacyRPCDaemon):
     '''Handles connections to a daemon at the given URL.
 
