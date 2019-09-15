@@ -3284,9 +3284,17 @@ class Syscoin(AuxPowMixin, Coin):
     DESERIALIZER = lib_tx.DeserializerAuxPowSegWit
 
 
-class LightBitcoin(BitcoinSegwit, Coin):
-    NAME = "LightBitcoin"
+class LightningBitcoin(BitcoinSegwit, Coin):
+    NAME = "LightningBitcoin"
     SHORTNAME = "LBTC"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("00")
+    P2SH_VERBYTES = [bytes.fromhex("05")]
+    WIF_BYTE = bytes.fromhex("80")
+    GENESIS_HASH = ('08a54bbf1a76ac6437d3d63159ced807'
+                    '2a484ba0c8539db5900c5df5a863ef4d')
     FORK_HEIGHT = 499999
     TX_COUNT = 265026255
     TX_COUNT_HEIGHT = 499923
