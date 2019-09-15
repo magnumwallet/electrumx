@@ -3282,6 +3282,21 @@ class Syscoin(AuxPowMixin, Coin):
     DAEMON = daemon.SyscoinDaemon
     SESSIONCLS = SyscoinElectrumX
     DESERIALIZER = lib_tx.DeserializerAuxPowSegWit
+
+
+class LightBitcoin(BitcoinSegwit, Coin):
+    NAME = "LightBitcoin"
+    SHORTNAME = "LBTC"
+    FORK_HEIGHT = 499999
+    TX_COUNT = 265026255
+    TX_COUNT_HEIGHT = 499923
+    TX_PER_BLOCK = 50
+    REORG_LIMIT = 1000
+    RPC_PORT = 9332
+
+    PEERS = [
+        '47.96.185.83 t50998 s50999',
+    ]
 # Magnum coins finish
 
 
