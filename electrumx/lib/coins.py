@@ -3076,10 +3076,12 @@ class LitecoinCash(Coin):
     TX_PER_BLOCK = 10
     RPC_PORT = 9332
     REORG_LIMIT = 800
+    VALUE_PER_COIN = 10000000
     PEERS = [
         'hetzner01.fischl-online.de s50010',
         'electrum.mgnm.rocks s3020',
     ]
+
 
 
 class BitcoinAir(Coin):
