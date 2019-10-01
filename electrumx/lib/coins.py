@@ -3307,6 +3307,24 @@ class LightningBitcoin(BitcoinSegwit, Coin):
     PEERS = [
         '47.96.185.83 t50998 s50999',
     ]
+
+
+class Footballcoin(Coin):
+    NAME = "Footballcoin"
+    SHORTNAME = "XFC"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("00")
+    P2SH_VERBYTES = [bytes.fromhex("05")]
+    WIF_BYTE = bytes.fromhex("80")
+    GENESIS_HASH = ('00e935cde5a4066da0ec69948424d502d106a5d74ac47d8ad492e83bc4aac9a8')
+    TX_COUNT = 329196
+    TX_COUNT_HEIGHT = 68379
+    TX_PER_BLOCK = 4000
+    RPC_PORT = 8023
+    REORG_LIMIT = 800
+    PEERS = []
 # Magnum coins finish
 
 
