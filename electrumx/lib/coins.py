@@ -3133,23 +3133,44 @@ class Microbitcoin(Coin):
     NAME = "Microbitcoin"
     SHORTNAME = "MBC"
     NET = "mainnet"
-    XPUB_VERBYTES = bytes.fromhex("0488b21e")
-    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    VALUE_PER_COIN = 10000
     P2PKH_VERBYTE = bytes.fromhex("1a")
     P2SH_VERBYTES = [bytes.fromhex("33")]
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
     WIF_BYTE = bytes.fromhex("80")
-    GENESIS_HASH = ('000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f')
+    GENESIS_HASH = ('14c03ecf20edc9887fb98bf34b53809f063fc491e73f588961f764fac88ecbae')
     DESERIALIZER = lib_tx.DeserializerSegWit
     TX_COUNT = 318337769
     TX_COUNT_HEIGHT = 1697605
     TX_PER_BLOCK = 4000
-    RPC_PORT = 9332
+    RPC_PORT = 6501
     REORG_LIMIT = 800
     PEERS = [
-        'electrum.mgnm.rocks s3023',
+        'electrum.mgnm.rocks s5023',
         '52.78.182.106 t7403',
         '13.57.248.201 t7403',
     ]
+    @classmethod
+        def electrum_header(cls, header, height):
+            version, = struct.unpack('<I', header[:4])
+            timestamp, bits, nonce = struct.unpack('<III', header[68:80])
+            block_hash = bytes(reversed(cls.header_hash(header, height))).hex()
+
+            return {
+                'block_height': height,
+                'version': version,
+                'block_hash': block_hash,
+                'prev_block_hash': hash_to_str(header[4:36]),
+                'merkle_root': hash_to_str(header[36:68]),
+                'timestamp': timestamp,
+                'bits': bits,
+                'nonce': nonce,
+            }
+
+    @classmethod
+    def header_hash(cls, header, height=0):
+        return blake2b_hash(header)
 
 
 class Anon(EquihashMixin, Coin):
