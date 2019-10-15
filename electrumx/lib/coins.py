@@ -3248,21 +3248,21 @@ class Microbitcoin(Coin):
         '13.57.248.201 t7403',
     ]
     @classmethod
-        def electrum_header(cls, header, height):
-            version, = struct.unpack('<I', header[:4])
-            timestamp, bits, nonce = struct.unpack('<III', header[68:80])
-            block_hash = bytes(reversed(cls.header_hash(header, height))).hex()
+    def electrum_header(cls, header, height):
+        version, = struct.unpack('<I', header[:4])
+        timestamp, bits, nonce = struct.unpack('<III', header[68:80])
+        block_hash = bytes(reversed(cls.header_hash(header, height))).hex()
 
-            return {
-                'block_height': height,
-                'version': version,
-                'block_hash': block_hash,
-                'prev_block_hash': hash_to_str(header[4:36]),
-                'merkle_root': hash_to_str(header[36:68]),
-                'timestamp': timestamp,
-                'bits': bits,
-                'nonce': nonce,
-            }
+        return {
+            'block_height': height,
+            'version': version,
+            'block_hash': block_hash,
+            'prev_block_hash': hash_to_str(header[4:36]),
+            'merkle_root': hash_to_str(header[36:68]),
+            'timestamp': timestamp,
+            'bits': bits,
+            'nonce': nonce,
+        }
 
     @classmethod
     def header_hash(cls, header, height=0):
