@@ -37,6 +37,11 @@ _new_hash = hashlib.new
 _new_hmac = hmac.new
 HASHX_LEN = 11
 
+def blake2b_hash(x):
+    '''Simple wrapper of hashlib blake2b.'''
+    h = hashlib.blake2b(digest_size=32)
+    h.update(x)
+    return h.digest()
 
 def sha256(x):
     '''Simple wrapper of hashlib sha256.'''
