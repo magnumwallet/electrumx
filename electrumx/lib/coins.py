@@ -3450,9 +3450,9 @@ class Netbox(Coin):
     NET = "mainnet"
     XPUB_VERBYTES = bytes.fromhex("0488b21e")
     XPRV_VERBYTES = bytes.fromhex("0488ade4")
-    P2PKH_VERBYTE = bytes.fromhex("00")
-    P2SH_VERBYTES = [bytes.fromhex("05")]
-    WIF_BYTE = bytes.fromhex("80")
+    P2PKH_VERBYTE = bytes.fromhex("35")
+    P2SH_VERBYTES = [bytes.fromhex("26")]
+    WIF_BYTE = bytes.fromhex("5c")
     GENESIS_HASH = ('000000077c8f4eabb532fdacc3eb56825d3bcf1401e4958b9a2317cc7d8b0496')
     TX_COUNT_HEIGHT = 569399
     TX_COUNT = 2157510
@@ -3507,6 +3507,24 @@ class Netbox(Coin):
                 'bits': bits,
                 'nonce': nonce,
             }
+
+class Netboxcopy(Coin):
+    NAME = "Netboxcopy"
+    SHORTNAME = "NBXC"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("35")
+    P2SH_VERBYTES = [bytes.fromhex("26")]
+    WIF_BYTE = bytes.fromhex("5c")
+    GENESIS_HASH = ('000000077c8f4eabb532fdacc3eb56825d3bcf1401e4958b9a2317cc7d8b0496')
+    TX_COUNT = 265026255
+    TX_COUNT_HEIGHT = 499923
+    REORG_LIMIT = 1000
+    TX_PER_BLOCK = 4000
+    RPC_PORT = 8023
+    PEERS = []
+
 # Magnum coins finish
 
 
