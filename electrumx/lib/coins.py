@@ -3525,6 +3525,23 @@ class Netboxcopy(Coin):
     RPC_PORT = 8023
     PEERS = []
 
+
+class Lynx(Coin):
+    NAME = "Lynx"
+    SHORTNAME = "LYNX"
+    NET = "mainnet"
+    P2PKH_VERBYTE = bytes.fromhex("2d")
+    P2SH_VERBYTES = [bytes.fromhex("16")]
+    WIF_BYTE = bytes.fromhex("ad")
+    GENESIS_HASH = ('984b30fc9bb5e5ff424ad7f4ec193053'
+                    '8a7b14a2d93e58ad7976c23154ea4a76')
+    DESERIALIZER = lib_tx.DeserializerSegWit
+    TX_COUNT = 1
+    TX_COUNT_HEIGHT = 1
+    TX_PER_BLOCK = 1
+    RPC_PORT = 9139
+    REORG_LIMIT = 5000
+
 # Magnum coins finish
 
 
