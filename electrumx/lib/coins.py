@@ -3604,44 +3604,6 @@ class EcoDollar(Coin):
             import quark_hash
             return quark_hash.getPoWHash(header)
 
-class EcoDollarTest(Coin):
-    NAME = "EcoDollarTest"
-    SHORTNAME = "ECOS"
-    VALUE_PER_COIN = 100000000
-    NET = "mainnet"
-    XPUB_VERBYTES = bytes.fromhex("022D2533")
-    XPRV_VERBYTES = bytes.fromhex("0221312B")
-    GENESIS_HASH = ('7c24cab77a7215bdf226411fcb1dd155d2f1bed81b6c46ed6a5fc089c3e84a8c')
-    P2PKH_VERBYTE = bytes.fromhex("21")
-    P2SH_VERBYTE = bytes.fromhex("0f")
-    WIF_BYTE = bytes.fromhex("c9")
-    TX_COUNT_HEIGHT = 569399
-    TX_COUNT = 2157510
-    TX_PER_BLOCK = 1
-    STATIC_BLOCK_HEADERS = False
-    RPC_PORT = 39024
-    ZEROCOIN_HEADER = 112
-    ZEROCOIN_START_HEIGHT = 400
-    ZEROCOIN_BLOCK_VERSION = 4
-
-    @classmethod
-    def static_header_len(cls, height):
-        '''Given a header height return its length.'''
-        if (height >= cls.ZEROCOIN_START_HEIGHT):
-            return cls.ZEROCOIN_HEADER
-        else:
-            return cls.BASIC_HEADER_SIZE
-
-    @classmethod
-    def header_hash(cls, header):
-        '''Given a header return the hash.'''
-        version, = struct.unpack('<I', header[:4])
-        if version >= cls.ZEROCOIN_BLOCK_VERSION:
-            return super().header_hash(header)
-        else:
-            import quark_hash
-            return quark_hash.getPoWHash(header)
-
 # Magnum coins finish
 
 
