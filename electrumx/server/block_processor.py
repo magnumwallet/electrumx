@@ -236,7 +236,7 @@ class BlockProcessor(object):
             lheight = self.height
             lhprevs = hprevs[0]
             lchain = chain[0]
-            self.logger.warning('{lheight:,d} {lhprevs} {lchain}')
+            self.logger.warning(f'{lheight:,d} {lhprevs} {lchain}')
             await self.prefetcher.reset_height(self.height)
 
     async def reorg_chain(self, count=None):
