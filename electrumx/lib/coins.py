@@ -3573,7 +3573,7 @@ class EcoDollar(Coin):
     NET = "mainnet"
     XPUB_VERBYTES = bytes.fromhex("022D2533")
     XPRV_VERBYTES = bytes.fromhex("0221312B")
-    GENESIS_HASH = ('7c24cab77a7215bdf226411fcb1dd155d2f1bed81b6c46ed6a5fc089c3e84a8c')
+    GENESIS_HASH = ('000006f09e91f502ed156ff4ae30106d56e5e435dc5abca4315655b0798a09b8')
     P2PKH_VERBYTE = bytes.fromhex("21")
     P2SH_VERBYTE = bytes.fromhex("0f")
     WIF_BYTE = bytes.fromhex("c9")
