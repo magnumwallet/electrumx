@@ -233,6 +233,10 @@ class BlockProcessor(object):
             # just to reset the prefetcher and try again.
             self.logger.warning('daemon blocks do not form a chain; '
                                 'resetting the prefetcher')
+            lheight = self.height
+            lhprevs = hprevs[0]
+            lchain = chain[0]
+            self.logger.warning('{lheight:,d} {lhprevs} {lchain}')
             await self.prefetcher.reset_height(self.height)
 
     async def reorg_chain(self, count=None):
